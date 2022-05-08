@@ -1,2 +1,2 @@
 ## Implemented and developed number of algorithms for solving practice problems with JAVA
-## Each Solution is specific
+## For each problem given specific and optimal solution
