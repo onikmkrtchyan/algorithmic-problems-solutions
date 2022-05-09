@@ -575,8 +575,9 @@ public class Solution {
 
     /**
      * Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
-     *
+     * <p>
      * You must implement a solution with a linear runtime complexity and use only constant extra space.
+     *
      * @param nums
      * @return
      */
@@ -605,17 +606,18 @@ public class Solution {
 
     /**
      * calculate root of x
+     *
      * @param x
      * @return
      */
     public int mySqrt(int x) {
-        int retValue = 0 ;
-        if(x>=1)
+        int retValue = 0;
+        if (x >= 1)
             retValue++;
         else
             return 0;
-        for( ; retValue*retValue <= x ;++retValue){
-            if(retValue > Integer.MAX_VALUE/retValue)
+        for (; retValue * retValue <= x; ++retValue) {
+            if (retValue > Integer.MAX_VALUE / retValue)
                 break;
         }
         return --retValue;
@@ -623,20 +625,21 @@ public class Solution {
 
     /**
      * Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
-     *
+     * <p>
      * You may assume that each input would have exactly one solution, and you may not use the same element twice.
-     *
+     * <p>
      * You can return the answer in any order.
+     *
      * @param nums
      * @param target
      * @return
      */
     public int[] twoSum(int[] nums, int target) {
-        int [] retArr = new int [2];
+        int[] retArr = new int[2];
 
-        for (int i = 0 ; i< nums.length - 1;++i ){
-            for(int j = i+1 ;j < nums.length; ++j )  {
-                if (nums[i]+nums[j] == target ){
+        for (int i = 0; i < nums.length - 1; ++i) {
+            for (int j = i + 1; j < nums.length; ++j) {
+                if (nums[i] + nums[j] == target) {
                     retArr[0] = i;
                     retArr[1] = j;
                     return retArr;
@@ -649,6 +652,7 @@ public class Solution {
 
     /**
      * Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+     *
      * @param haystack
      * @param needle
      * @return
@@ -658,7 +662,7 @@ public class Solution {
         int sml = needle.length();
         if (0 == sml)
             return 0;
-        else if (0 == bil )
+        else if (0 == bil)
             return -1;
         for (int i = 0; i < bil - sml + 1; i++) {
             if (haystack.substring(i, i + sml).equals(needle))
