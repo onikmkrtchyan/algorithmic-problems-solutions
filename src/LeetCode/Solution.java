@@ -5,7 +5,7 @@ import java.util.*;
 public class Solution {
 
     public static boolean isPalindrome(int x) {
-        ArrayList<Integer> digits = new ArrayList<Integer>();
+        ArrayList<Integer> digits = new ArrayList<>();
         int lastDigit;
         if (x < 0 || (x % 10 == 0 && x != 0))
             return false;
@@ -34,7 +34,7 @@ public class Solution {
      * @return
      */
     public static boolean isPalindromeSecondSolution(int x) {
-        ArrayList<Integer> digits = new ArrayList<Integer>();
+        ArrayList<Integer> digits = new ArrayList<>();
         int lastDigit;
         while (x > 0) {
             lastDigit = x % 10;
