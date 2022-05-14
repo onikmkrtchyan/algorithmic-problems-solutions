@@ -2,7 +2,7 @@ package factorialAndFibonacci;
 
 public class Factorial {
     public static void main(String[] args) {
-        int n = 5;
+        int n = 10;
         System.out.println(factorialRecursive(n));
         System.out.println(factorialArray(n));
     }
@@ -14,8 +14,12 @@ public class Factorial {
     }
 
     public static int factorialArray(int n) {
+        int a = 1;
+        for (int i = 2; i <= n; i++) {
+            a = i * a;
+        }
+     return a;
 
-     return 1;
     }
 
 }
