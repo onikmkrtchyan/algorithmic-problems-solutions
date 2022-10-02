@@ -670,5 +670,80 @@ public class Solution {
         }
         return -1;
     }
+
+    /**
+     * Given an integer number n
+     * Return the difference between the product of its digits and the sum of its digits.
+     * @param n number
+     * @return difference between the product of n's digits and the sum of its digits
+     */
+    public static int subtractProductAndSum(int n) {
+        int sum = 0, product = 1, lastDigit;
+
+        while (n != 0){
+            lastDigit = n % 10;
+            product *= lastDigit;
+            sum += lastDigit;
+            n /= 10;
+        }
+
+        return product - sum;
+    }
+
+    /**
+     * Given two non-negative integers num1 and num2 represented as strings,
+     * return the product of num1 and num2, also represented as a string.
+     * You must not use any built-in BigInteger library or convert the inputs to integer directly
+     * @param num1 non negative integer
+     * @param num2 non negative integer
+     * @return the product of num1 and num2, also represented as a string
+     */
+    public static String multiply(String num1, String num2) {
+        int numOneLength = num1.length(), numTwoLength = num2.length(), mul, p1, p2, sum;
+        int[] pos = new int[numOneLength + numTwoLength];
+
+        for (int i = numOneLength - 1; i >= 0; i--) {
+            for (int j = numTwoLength - 1; j >= 0; j--) {
+                mul = (num1.charAt(i) - '0') * (num2.charAt(j) - '0');
+
+                p1 = i + j;
+                p2 = i + j + 1;
+
+                sum = mul + pos[p2];
+
+                pos[p1] += sum / 10;
+                pos[p2] = (sum) % 10;
+            }
+        }
+
+        StringBuilder retValue = new StringBuilder();
+        for (int p : pos) if (!(p == 0 && retValue.length() == 0)) retValue.append(p);
+        return retValue.length() == 0 ? "0" : retValue.toString();
+    }
+
+    /**
+     * Problem is to find count of pairs with given sum.
+     *
+     * @param arr given array
+     * @param n   arr length
+     * @param k   given sum
+     * @return count of pairs with given sum
+     */
+    static int getPairsCount(int[] arr, int n, int k) {
+        HashMap<Integer, Integer> m = new HashMap<>();
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if (m.containsKey(k - arr[i])) {
+                count += m.get(k - arr[i]);
+            }
+            if (m.containsKey(arr[i])) {
+                m.put(arr[i], m.get(arr[i]) + 1);
+            } else {
+                m.put(arr[i], 1);
+            }
+        }
+        return count;
+    }
+
 }
 
