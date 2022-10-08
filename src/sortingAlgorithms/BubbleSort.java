@@ -1,4 +1,3 @@
-
 package sortingAlgorithms;
 
 import java.util.Arrays;
@@ -11,23 +10,23 @@ public class BubbleSort {
         System.out.println(Arrays.toString(bubbleSort(arr)));
     }
 
-    public static int[] bubbleSort(int[] arr){
+    /**
+     * Bubble Sort has time complexity of O(n^2).
+     *
+     * @param arr arr
+     * @return sorted arr
+     */
+    public static int[] bubbleSort(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             boolean isSorted = true;
             for (int j = 0; j < arr.length - i - 1; j++) {
-                if(arr[j] > arr[j+1]) {
-                    swap(arr,j);
+                if (arr[j] > arr[j + 1]) {
+                    Tools.swap(arr, j, j + 1);
                     isSorted = false;
                 }
             }
-            if(isSorted) break;
+            if (isSorted) break;
         }
         return arr;
-    }
-
-    private static void swap(int[] arr,int j){
-        int temp = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = temp;
     }
 }
