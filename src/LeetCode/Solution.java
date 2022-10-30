@@ -745,5 +745,45 @@ public class Solution {
         return count;
     }
 
-}
+    /**
+     * The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this:
+     * (you may want to display this pattern in a fixed font for better legibility)
+     * example located at the end of solution
+     * @param s string word
+     * @param numRows number of rows for result
+     * @return string
+     */
+    public static String convert(String s, int numRows) {
+        int sLength = s.length();
+        if (numRows == 1 || numRows >= sLength) {
+            return s;
+        }
 
+        StringBuilder retStr = new StringBuilder();
+        int diff = 2 * (numRows - 1);
+
+        for (int j = 0; j < numRows; j++) {
+            for (int i = 0; i + j < sLength; i += diff) {
+                retStr.append(s.charAt(i + j));
+                if (j != 0 && j != numRows - 1 && i + diff - j < sLength) {
+                    retStr.append(s.charAt(i + diff - j));
+                }
+            }
+        }
+
+        return retStr.toString();
+
+/*
+            PAYPALISHIRINGAGAIN
+            0123456789021345678
+
+            P       H       A
+            A     S I     G I
+            Y   I   R   A   N
+            P L     I G
+            A       N
+
+*/
+    }
+
+}

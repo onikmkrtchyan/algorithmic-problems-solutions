@@ -11,8 +11,9 @@ public class Main {
         String num1 = Arrays.toString(arr1).replace(",", "").replace("[", "").replace("]", "").replace(" ", "");
         String num2 = Arrays.toString(arr2).replace(",", "").replace("[", "").replace("]", "").replace(" ", "");
 
-        System.out.println(Solution.multiply(num1, num2));
-        System.out.println("hi");
-    }
+        System.out.println(Solution.convert("PAYPALISHIRINGAGAIN", 5));
 
+//        System.out.println(Solution.multiply(num1, num2));
+//        System.out.println("hi");
+    }
 }
