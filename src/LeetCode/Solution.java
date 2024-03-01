@@ -855,7 +855,7 @@ public class Solution {
      * @return last unique word
      */
     public static String findLastUniqueWord(String[] words) {
-        Set<String> wordsSet = new LinkedHashSet<>();
+        Set<String> wordsSet = new HashSet<>();
         Set<String> duplicateSet = new HashSet<>();
 
         // find all duplicate words
