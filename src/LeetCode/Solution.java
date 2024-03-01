@@ -885,7 +885,7 @@ public class Solution {
 
     public static void main(String[] args) {
 
-        String[] words = {"cat", "cats", "and", "sand", "dog", "sand", "dog"};
+        String[] words = {"cat", "cats", "and", "sand", "dog", "sand", "dog", "fish"};
 
         System.out.println(findLastUniqueWord(words));
     }
