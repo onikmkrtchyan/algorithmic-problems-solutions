@@ -674,13 +674,14 @@ public class Solution {
     /**
      * Given an integer number n
      * Return the difference between the product of its digits and the sum of its digits.
+     *
      * @param n number
      * @return difference between the product of n's digits and the sum of its digits
      */
     public static int subtractProductAndSum(int n) {
         int sum = 0, product = 1, lastDigit;
 
-        while (n != 0){
+        while (n != 0) {
             lastDigit = n % 10;
             product *= lastDigit;
             sum += lastDigit;
@@ -694,6 +695,7 @@ public class Solution {
      * Given two non-negative integers num1 and num2 represented as strings,
      * return the product of num1 and num2, also represented as a string.
      * You must not use any built-in BigInteger library or convert the inputs to integer directly
+     *
      * @param num1 non negative integer
      * @param num2 non negative integer
      * @return the product of num1 and num2, also represented as a string
@@ -749,7 +751,8 @@ public class Solution {
      * The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this:
      * (you may want to display this pattern in a fixed font for better legibility)
      * example located at the end of solution
-     * @param s string word
+     *
+     * @param s       string word
      * @param numRows number of rows for result
      * @return string
      */
@@ -786,4 +789,104 @@ public class Solution {
 */
     }
 
+    public static int searchInsert(int[] nums, int target) {
+        int startIndex = 0;
+        int endIndex = nums.length - 1;
+
+        while (startIndex <= endIndex) {
+            int midIndex = startIndex + (endIndex - startIndex) / 2;
+            if (nums[midIndex] == target) return midIndex;
+            else if (nums[midIndex] > target) endIndex = midIndex - 1;
+            else startIndex = midIndex + 1;
+        }
+
+        return startIndex;
+    }
+
+    private static int lo, maxLen;
+
+    public static String longestPalindrome(String s) {
+        int len = s.length();
+        if (len < 2)
+            return s;
+
+        for (int i = 0; i < len - 1; i++) {
+            extendPalindrome(s, i, i);  //assume odd length, try to extend Palindrome as possible
+            extendPalindrome(s, i, i + 1); //assume even length.
+        }
+        return s.substring(lo, lo + maxLen);
+    }
+
+    private static void extendPalindrome(String s, int j, int k) {
+        while (j >= 0 && k < s.length() && s.charAt(j) == s.charAt(k)) {
+            j--;
+            k++;
+        }
+
+        if (maxLen < k - j - 1) {
+            lo = j + 1;
+            maxLen = k - j - 1;
+        }
+    }
+
+    public static boolean containsDuplicate1(int[] nums) {
+        Set<Integer> noDuplicates = new HashSet<>();
+        for (int i = nums.length - 1; i >= 0; i--) noDuplicates.add(nums[i]);
+        return noDuplicates.size() != nums.length;
+    }
+
+    public static int searchInsert1(int[] nums, int target) {
+        int startIndex = 0;
+        int endIndex = nums.length - 1;
+
+        while (endIndex >= startIndex) {
+            int midIndex = startIndex + (endIndex - startIndex) / 2;
+            if (nums[midIndex] == target) return midIndex;
+            else if (nums[midIndex] > target) endIndex = midIndex - 1;
+            else startIndex = midIndex + 1;
+        }
+
+        return startIndex;
+    }
+
+    /**
+     * Given an array of Strings, find the last unique word in the array.
+     * @param words array of Strings
+     * @return last unique word
+     */
+    public static String findLastUniqueWord(String[] words) {
+        Set<String> wordsSet = new LinkedHashSet<>();
+        Set<String> duplicateSet = new HashSet<>();
+
+        // find all duplicate words
+        for (String word : words) {
+            if (wordsSet.contains(word)) {
+                duplicateSet.add(word);
+            } else {
+                wordsSet.add(word);
+            }
+        }
+
+        // remove all duplicates from wordsSet
+        wordsSet.removeAll(duplicateSet);
+
+        // find last unique word
+        String lastUniqueWord = "";
+        for (int i = words.length - 1; i >= 0; i--) {
+            if (wordsSet.contains(words[i])) {
+                lastUniqueWord = words[i];
+                break;
+            }
+        }
+
+        return lastUniqueWord;
+    }
+
+
+    public static void main(String[] args) {
+
+        String[] words = {"cat", "cats", "and", "sand", "dog", "sand", "dog"};
+
+        System.out.println(findLastUniqueWord(words));
+    }
 }
