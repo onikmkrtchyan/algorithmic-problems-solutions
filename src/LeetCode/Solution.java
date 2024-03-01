@@ -851,6 +851,7 @@ public class Solution {
 
     /**
      * Given an array of Strings, find the last unique word in the array.
+     *
      * @param words array of Strings
      * @return last unique word
      */
@@ -882,11 +883,81 @@ public class Solution {
         return lastUniqueWord;
     }
 
+    /**
+     * Given two arrays of Strings, find all words in first array which have anagram in second array.
+     *
+     * @param words  array of Strings
+     * @param words2 array of Strings
+     * @return list of anagrams
+     */
+    public static List<String> anagramProblem(String[] words, String[] words2) {
+        // collect all sorted words into sortedWordSet2
+        Set<String> sortedWordSet2 = new HashSet<>();
+        for (String word : words2) {
+            String sortedCharacters = sortCharacters(word);
+            sortedWordSet2.add(sortedCharacters);
+        }
+
+        // find all anagrams and collect them into retList
+        List<String> retList = new ArrayList<>();
+        Set<String> anagramMatched = new HashSet<>();
+        for (String word : words) {
+            if (sortedWordSet2.contains(sortCharacters(word))) {
+                if (!anagramMatched.contains(word)) {
+                    anagramMatched.add(word);
+                    retList.add(word);
+                }
+            }
+        }
+
+        return retList;
+    }
+
+    // Method to return a unique character signature for each string.
+    static String sortCharacters(String input) {
+        char[] chars = input.toCharArray();
+        Arrays.sort(chars);
+        return new String(chars);
+    }
+
+
+    /**
+     * Given two arrays of Strings, find the sum of lengths of all words in second array which have an anagram in first array.
+     *
+     * @param array1 array of Strings
+     * @param array2 array of Strings
+     * @return sum of lengths of all words in second array which have an anagram in first array
+     */
+    public static int findAnagrams(String[] array1, String[] array2) {
+        Set<String> sortedWordsInArray1 = new HashSet<>();
+        for (String word : array1) {
+            sortedWordsInArray1.add(sortCharacters(word));
+        }
+
+        int lengthSum = 0;
+        Set<String> anagramsMatched = new HashSet<>();
+        for (String word : array2) {
+            final boolean isAnagram = sortedWordsInArray1.contains(sortCharacters(word));
+            final boolean isNotDuplicate = !anagramsMatched.contains(word);
+            if (isAnagram && isNotDuplicate) {
+                anagramsMatched.add(word);
+                lengthSum += word.length();
+            }
+        }
+
+        return lengthSum;
+    }
 
     public static void main(String[] args) {
+        String[] array1 = {"cat", "dog", "tac", "god", "act"};
+        String[] array2 = {"tca", "ogd", "atc", "taco"};
+        int result = findAnagrams(array1, array2);
+        System.out.println(result);   // output: 9
 
-        String[] words = {"cat", "cats", "and", "sand", "dog", "sand", "dog", "fish"};
-
-        System.out.println(findLastUniqueWord(words));
+        // additional test samples
+        String[] array3 = {"rat", "tar", "bat", "tab", "bats"};
+        String[] array4 = {"tra", "art", "abr"};
+        int result2 = findAnagrams(array3, array4);
+        System.out.println(result2);  // output: 6
     }
 }
