@@ -948,16 +948,27 @@ public class Solution {
         return lengthSum;
     }
 
-    public static void main(String[] args) {
-        String[] array1 = {"cat", "dog", "tac", "god", "act"};
-        String[] array2 = {"tca", "ogd", "atc", "taco"};
-        int result = findAnagrams(array1, array2);
-        System.out.println(result);   // output: 9
+    /**
+     * Given an array of Strings, find the number of majority element otherwise return -1.
+     * @param words array of Strings
+     * @return number of majority element or -1 if there is no majority element
+     */
+    static int getMajorityElement(String[] words) {
+        int halfListSize = words.length / 2;
+        Map<String, Integer> wordsAndCounts = new HashMap<>();
 
-        // additional test samples
-        String[] array3 = {"rat", "tar", "bat", "tab", "bats"};
-        String[] array4 = {"tra", "art", "abr"};
-        int result2 = findAnagrams(array3, array4);
-        System.out.println(result2);  // output: 6
+        for (String word : words) {
+            final int getWordCount = wordsAndCounts.getOrDefault(word, 0) + 1;
+            if (getWordCount > halfListSize) {
+                return getWordCount;
+            }
+            wordsAndCounts.put(word, getWordCount);
+        }
+
+        return -1;
+    }
+
+    public static void main(String[] args) {
+
     }
 }
