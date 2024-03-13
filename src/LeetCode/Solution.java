@@ -968,6 +968,40 @@ public class Solution {
         return -1;
     }
 
+    //Binary search recursive
+    static int binarySearch(int[] arr, int startIndex, int endIndex, int target) {
+        if (startIndex > endIndex) return -1;
+
+        int mid = startIndex + (endIndex - startIndex) / 2;
+
+        if (arr[mid] == target) return mid;
+
+        if (arr[mid] < target)
+            return binarySearch(arr, mid + 1, endIndex, target);
+        else
+            return binarySearch(arr, startIndex, mid - 1, target);
+
+    }
+
+    //Binary search non-recursive
+    static int binarySearchNonRecursive(int[] arr, int target) {
+        int start = 0;
+        int end = arr.length - 1;
+
+        while (end >= start) {
+            int mid = start + ((end - start) / 2);
+
+            if (arr[mid] == target) return mid;
+
+            if (arr[mid] < target) start = mid + 1;
+
+            else end = mid - 1;
+        }
+
+        return -1;
+    }
+
+
     public static void main(String[] args) {
 
     }
