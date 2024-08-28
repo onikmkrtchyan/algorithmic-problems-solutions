@@ -45,9 +45,9 @@ public class Main {
             return;
         }
 
-        System.out.print(node.data + ", ");
 
         preOrderTraversal(node.left);
+        System.out.print(node.data + ", ");
         preOrderTraversal(node.right);
     }
 }
