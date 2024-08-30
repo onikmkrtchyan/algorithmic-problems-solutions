@@ -1,3 +1,5 @@
+
+
 public class MatrixPathFinder {
 
     public static boolean isPathExists(boolean[][] matrix) {
@@ -27,23 +29,27 @@ public class MatrixPathFinder {
 
         // Explore all 4 possible directions (down, up, right, left)
         if (dfs(matrix, visited, x + 1, y) ||  // Move down
-            dfs(matrix, visited, x - 1, y) ||  // Move up
-            dfs(matrix, visited, x, y + 1) ||  // Move right
-            dfs(matrix, visited, x, y - 1)) {  // Move left
+                dfs(matrix, visited, x - 1, y) ||  // Move up
+                dfs(matrix, visited, x, y + 1) ||  // Move right
+                dfs(matrix, visited, x, y - 1)) {  // Move left
+
             return true;
         }
 
         // Unmark the visited cell (backtrack)
         visited[x][y] = false;
 
+        System.out.println(visited);
+
         return false;
     }
 
     public static void main(String[] args) {
         boolean[][] matrix = {
-            { true, true, false },          // 1 1 0
-            { false, true, false },         // 0 1 0
-            { false, true, true }           // 0 1 1
+                {true, true, true, true},
+                {true, true, false, false},
+                {true, true, true, true},
+                {true, true, false, true}
         };
 
         if (isPathExists(matrix)) {
