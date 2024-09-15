@@ -1,4 +1,4 @@
-
+import java.util.Stack;
 
 public class MatrixPathFinder {
 
@@ -39,7 +39,40 @@ public class MatrixPathFinder {
         // Unmark the visited cell (backtrack)
         visited[x][y] = false;
 
-        System.out.println(visited);
+        return false;
+    }
+
+    public static boolean isPathExistsIterative(boolean[][] matrix) {
+        int n = matrix.length;
+
+        boolean[][] visited = new boolean[n][n];
+        Stack<int[]> stack = new Stack<>();
+        stack.push(new int[]{0, 0});
+
+        while (!stack.isEmpty()) {
+            int[] current = stack.pop();
+            int x = current[0];
+            int y = current[1];
+
+            // Base conditions
+            if (x < 0 || x >= n || y < 0 || y >= n || !matrix[x][y] || visited[x][y]) {
+                continue;
+            }
+
+            // If we've reached the bottom-right corner, return true
+            if (x == n - 1 && y == n - 1) {
+                return true;
+            }
+
+            // Mark the current cell as visited
+            visited[x][y] = true;
+
+            // Push all 4 possible directions (down, up, right, left) onto the stack
+            stack.push(new int[]{x + 1, y});  // Move down
+            stack.push(new int[]{x - 1, y});  // Move up
+            stack.push(new int[]{x, y + 1});  // Move right
+            stack.push(new int[]{x, y - 1});  // Move left
+        }
 
         return false;
     }
@@ -52,7 +85,13 @@ public class MatrixPathFinder {
                 {true, true, false, true}
         };
 
-        if (isPathExists(matrix)) {
+//        if (isPathExists(matrix)) {
+//            System.out.println("Path exists!");
+//        } else {
+//            System.out.println("No path exists.");
+//        }
+
+        if (isPathExistsIterative(matrix)) {
             System.out.println("Path exists!");
         } else {
             System.out.println("No path exists.");

@@ -634,7 +634,7 @@ public class Solution {
      * @param target
      * @return
      */
-    public int[] twoSum(int[] nums, int target) {
+    static int[] twoSum(int[] nums, int target) {
         int[] retArr = new int[2];
 
         for (int i = 0; i < nums.length - 1; ++i) {
@@ -950,6 +950,7 @@ public class Solution {
 
     /**
      * Given an array of Strings, find the number of majority element otherwise return -1.
+     *
      * @param words array of Strings
      * @return number of majority element or -1 if there is no majority element
      */
@@ -1001,8 +1002,104 @@ public class Solution {
         return -1;
     }
 
+    // Find the peak index from the array
+    static int findPeakIndex(int[] arr) {
+        int lowIndex = 0, highIndex = arr.length - 1;
+
+        while (lowIndex < highIndex) {
+            int mid = lowIndex + ((highIndex - lowIndex) / 2);
+
+            if (arr[mid] > arr[mid + 1]) {
+                highIndex = mid;
+            } else {
+                lowIndex = mid + 1;
+            }
+        }
+
+        return lowIndex;
+    }
+
+    // Find the maximum value from the rotated array
+    // if ascending
+    public static int findMax(int[] nums) {
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] > nums[right]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return nums[left];
+    }
+
+    //Find the missing number in the array
+    public static int missingNumber(int[] nums) {
+        final int length = nums.length;
+        final int sum = Arrays.stream(nums).sum();
+        final int expSum = (length * (length + 1)) / 2;
+
+        return expSum - sum;
+    }
+
+    //Find the missing number in the array with the best solution
+    static int[] twoSumSecondSol(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+
+            final int probableNumber = target - nums[i];
+            if (map.containsKey(probableNumber)) {
+                return new int[]{map.get(probableNumber), i};
+            }
+
+            map.put(nums[i], i);
+        }
+
+        return new int[]{0, 0};
+    }
+
+    // Find the missing number in the array with boolean array
+    static int missingNumberBool(int[] nums) {
+        int n = nums.length;
+        boolean[] v = new boolean[n + 1];
+
+        for (int num : nums) v[num] = true;
+        for (int i = 0; i < v.length; i++) if (!v[i]) return i;
+
+        return 0;
+    }
+
+    // Trap the rain water problem
+    // Given n non-negative integers representing an elevation map where the width of each bar is 1,
+    // compute how much water it can trap after raining.
+    static int trap(int[] arr) {
+        int startInd = 0;
+        int endInd = arr.length - 1;
+        int leftMax = arr[startInd];
+        int rightMax = arr[endInd];
+        int water = 0;
+
+        while (startInd < endInd) {
+            if (leftMax < rightMax) {
+                startInd++;
+                leftMax = Math.max(leftMax, arr[startInd]);
+                water += leftMax - arr[startInd];
+            } else {
+                endInd--;
+                rightMax = Math.max(rightMax, arr[endInd]);
+                water += rightMax - arr[endInd];
+            }
+        }
+
+        return water;
+    }
+
 
     public static void main(String[] args) {
+        final int[] nums = {9, 6, 4, 2, 3, 11, 7, 0, 1};
 
+        System.out.println(trap(nums));
     }
 }
