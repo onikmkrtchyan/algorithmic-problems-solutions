@@ -292,6 +292,17 @@ public class Solution {
         return false;
     }
 
+    public boolean containsDuplicate3(int[] nums) {
+        Set<Integer> integerSet = new HashSet<>();
+        for (int num : nums) {
+            if (!integerSet.add(num)) { // add returns false if the element is already present
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     /**
      * return true if number is power of 2, else return false
      * given 3 different solutions for this problem
@@ -831,7 +842,9 @@ public class Solution {
 
     public static boolean containsDuplicate1(int[] nums) {
         Set<Integer> noDuplicates = new HashSet<>();
-        for (int i = nums.length - 1; i >= 0; i--) noDuplicates.add(nums[i]);
+        for (int i = nums.length - 1; i >= 0; i--)
+            noDuplicates.add(nums[i]);
+
         return noDuplicates.size() != nums.length;
     }
 
@@ -1048,7 +1061,6 @@ public class Solution {
         Map<Integer, Integer> map = new HashMap<>();
 
         for (int i = 0; i < nums.length; i++) {
-
             final int probableNumber = target - nums[i];
             if (map.containsKey(probableNumber)) {
                 return new int[]{map.get(probableNumber), i};
@@ -1096,10 +1108,35 @@ public class Solution {
         return water;
     }
 
+    // Find the top k frequent elements in the array
+    public static int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> numberAndCounts = new HashMap<>();
+
+        for (int i : nums)
+            numberAndCounts.put(i, numberAndCounts.getOrDefault(i, 0) + 1);
+
+        List<int[]> keyValues = new ArrayList<>();
+
+        numberAndCounts.forEach((integer, integer2) -> keyValues.add(new int[]{integer2, integer}));
+
+        keyValues.sort(Comparator.comparingInt((int[] a) -> a[0]).reversed());
+
+        int[] res = new int[k];
+        for (int i = 0; i < k; i++) {
+            res[i] = keyValues.get(i)[1];
+        }
+
+        return res;
+    }
 
     public static void main(String[] args) {
-        final int[] nums = {9, 6, 4, 2, 3, 11, 7, 0, 1};
+        final int[] nums = {9, 1, 1, 1, 2, 3, 4, 3, 3, 4, 3, 4};
 
-        System.out.println(trap(nums));
+        final int[] ints = topKFrequent(nums, 3);
+
+        for (int anInt : ints) {
+            System.out.println(anInt);
+        }
+
     }
 }
