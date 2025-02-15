@@ -1129,14 +1129,63 @@ public class Solution {
         return res;
     }
 
-    public static void main(String[] args) {
-        final int[] nums = {9, 1, 1, 1, 2, 3, 4, 3, 3, 4, 3, 4};
+    // Find the top k frequent elements in the array with bucket sort, best solution O(n)
+    public static int[] topKFrequentBucketSort(int[] nums, int k) {
+        Map<Integer, Integer> count = new HashMap<>();
+        List<Integer>[] freq = new ArrayList[nums.length + 1];
 
-        final int[] ints = topKFrequent(nums, 3);
-
-        for (int anInt : ints) {
-            System.out.println(anInt);
+        for (int i = 0; i < freq.length; i++) {
+            freq[i] = new ArrayList<>();
         }
+
+        for (int n : nums) {
+            count.put(n, count.getOrDefault(n, 0) + 1);
+        }
+
+        for (Map.Entry<Integer, Integer> entry : count.entrySet()) {
+            freq[entry.getValue()].add(entry.getKey());
+        }
+
+        int[] res = new int[k];
+        int index = 0;
+        for (int i = nums.length - 1; index < k && i > 0; i--) {
+            for (int n : freq[i]) {
+                res[index++] = n;
+                if (index == k) return res;
+            }
+        }
+
+        return res;
+    }
+
+    public static int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] output = new int[n];
+        int[] prefix = new int[n];
+        int[] suffix = new int[n];
+
+        int s = 1;
+        for (int i = 0; i < nums.length; i++) {
+            s *= nums[i];
+
+            prefix[i] = s;
+        }
+
+        s = 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            s *= nums[i];
+
+            suffix[i] = s;
+        }
+
+        for (int i = 0; i < n; i++) {
+            output[i] = (i - 1 < 0 ? 1 : prefix[i - 1]) * (i + 1 >= n ? 1 : suffix[i + 1]);
+         }
+
+        return output;
+    }
+
+    public static void main(String[] args) {
 
     }
 }
