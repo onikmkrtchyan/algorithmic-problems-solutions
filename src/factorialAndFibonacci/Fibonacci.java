@@ -6,6 +6,7 @@ public class Fibonacci {
         System.out.println(fibonacciRecursive(n));
         System.out.println(fibonacciArray(n));
         System.out.println(fibonacci(n));
+        System.out.println(fibonacciCache(n));
 
     }
 
@@ -46,5 +47,35 @@ public class Fibonacci {
         }
 
         return b;
+    }
+
+    //Preventing redundant calculations of the same Fibonacci numbers
+    //Reducing time complexity from O(2^n) to O(n)
+    //Using O(n) space complexity to store the cache
+    //This approach is particularly efficient for larger values of n compared to the simple recursive solution, as it only calculates each Fibonacci number once and stores it for future use.
+    public static int fibonacciCache(int n) {
+        int[] cache = new int[n + 1];
+
+        final int i = fibonacciCache(n, cache);
+
+//        System.out.println(Arrays.toString(cache));
+
+        return i;
+    }
+
+    public static int fibonacciCache(int n, int[] cache) {
+        if (n <= 0) {
+            return 0;
+        }
+
+        if (n == 1 || n == 2) {
+            return 1;
+        }
+
+        if (cache[n] == 0) {
+            cache[n] = fibonacciCache(n - 1, cache) + fibonacciCache(n - 2, cache);
+        }
+
+        return cache[n];
     }
 }
