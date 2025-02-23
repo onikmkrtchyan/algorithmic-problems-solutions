@@ -816,30 +816,6 @@ public class Solution {
 
     private static int lo, maxLen;
 
-    public static String longestPalindrome(String s) {
-        int len = s.length();
-        if (len < 2)
-            return s;
-
-        for (int i = 0; i < len - 1; i++) {
-            extendPalindrome(s, i, i);  //assume odd length, try to extend Palindrome as possible
-            extendPalindrome(s, i, i + 1); //assume even length.
-        }
-        return s.substring(lo, lo + maxLen);
-    }
-
-    private static void extendPalindrome(String s, int j, int k) {
-        while (j >= 0 && k < s.length() && s.charAt(j) == s.charAt(k)) {
-            j--;
-            k++;
-        }
-
-        if (maxLen < k - j - 1) {
-            lo = j + 1;
-            maxLen = k - j - 1;
-        }
-    }
-
     public static boolean containsDuplicate1(int[] nums) {
         Set<Integer> noDuplicates = new HashSet<>();
         for (int i = nums.length - 1; i >= 0; i--)
@@ -1226,6 +1202,54 @@ public class Solution {
 
         return sb.toString();
     }
+
+    public static String longestPalindrome(String s) {
+        String res = "";
+        int resLen = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i; j < s.length(); j++) {
+                int l = i, r = j;
+                while (l < r && s.charAt(l) == s.charAt(r)) {
+                    l++;
+                    r--;
+                }
+
+                if (l >= r && resLen < (j - i + 1)) {
+                    res = s.substring(i, j + 1);
+                    resLen = j - i + 1;
+                }
+            }
+        }
+
+        return res;
+    }
+
+
+    public static String longestPalindromeRec(String s) {
+        int len = s.length();
+        if (len < 2)
+            return s;
+
+        for (int i = 0; i < len - 1; i++) {
+            extendPalindrome(s, i, i);  //assume odd length, try to extend Palindrome as possible
+            extendPalindrome(s, i, i + 1); //assume even length.
+        }
+        return s.substring(lo, lo + maxLen);
+    }
+
+    private static void extendPalindrome(String s, int j, int k) {
+        while (j >= 0 && k < s.length() && s.charAt(j) == s.charAt(k)) {
+            j--;
+            k++;
+        }
+
+        if (maxLen < k - j - 1) {
+            lo = j + 1;
+            maxLen = k - j - 1;
+        }
+    }
+
 
     public static void main(String[] args) {
         System.out.println(romanToInt("MCMXCIV"));
