@@ -66,3 +66,19 @@ func containsDuplicate(arr []int) bool {
 
 	return false
 }
+
+func twoSum(nums []int, target int) []int {
+	counts := make(map[int]int)
+
+	ret := make([]int, 0, 2)
+	for i, v := range nums {
+		if val, exists := counts[target-v]; exists {
+			ret = append(ret, val, i)
+			break
+		}
+
+		counts[v] = i
+	}
+
+	return ret
+}
