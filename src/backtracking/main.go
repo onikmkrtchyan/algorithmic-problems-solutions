@@ -16,10 +16,11 @@ func subsets(set []int) [][]int {
 	return res
 }
 
-// todo not working
 func backtracking(res *[][]int, current []int, i int, set []int) {
-	if i < len(set) {
-		*res = append(*res, current)
+	if i == len(set) {
+		subset := make([]int, len(current))
+		copy(subset, current) // 1- destination, 2- source
+		*res = append(*res, subset)
 		return
 	}
 
