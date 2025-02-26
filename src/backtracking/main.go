@@ -87,6 +87,12 @@ func dfs2(res *[][]int, cur []int, i int, set []int, target int) {
 		return
 	}
 
+	// Early termination: current number is too large
+	if set[i] > target {
+		return
+	}
+
+	// Include current number
 	cur = append(cur, set[i])
 	dfs2(res, cur, i+1, set, target-set[i])
 
