@@ -1,4 +1,4 @@
-package factorialAndFibonacci;
+package factorial_fibonacci;
 
 public class Factorial {
     public static void main(String[] args) {
