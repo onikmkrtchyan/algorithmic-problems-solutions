@@ -27,14 +27,6 @@ func topKFreqElements(arr []int, k int) []int {
 	return retArr[:k]
 }
 
-func main() {
-	//arr2 := []int{1, 1, 1, 2, 2, 2, 3}
-	arr2 := []int{4, 4, 4, 3, 3, 3, 1, 5, 5}
-	result2 := topKFreqElements(arr2, 2)
-	fmt.Println(result2)
-
-}
-
 func removeDuplicate(arr []int) []int {
 	seen := make(map[int]bool)
 	res := make([]int, 0)
@@ -81,4 +73,34 @@ func twoSum(nums []int, target int) []int {
 	}
 
 	return ret
+}
+
+func isAnagram(s string, t string) bool {
+	if len(s) != len(t) {
+		return false
+	}
+
+	arr := make([]int, 26)
+	for i := range s {
+		arr[s[i]-'a']++
+		arr[t[i]-'a']--
+	}
+
+	for _, v := range arr {
+		if v != 0 {
+			return false
+		}
+	}
+
+	return true
+}
+
+func main() {
+	//arr2 := []int{1, 1, 1, 2, 2, 2, 3}
+	arr2 := []int{4, 4, 4, 3, 3, 3, 1, 5, 5}
+	result2 := topKFreqElements(arr2, 2)
+	fmt.Println(result2)
+
+	//print(isAnagram("anagram", "nagaram"))
+
 }
