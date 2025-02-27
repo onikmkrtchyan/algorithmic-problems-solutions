@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func topKFreqElements(arr []int, k int) []int {
 	counts := make(map[int]int)
@@ -75,80 +78,21 @@ func twoSum(nums []int, target int) []int {
 	return ret
 }
 
-func isAnagram(s string, t string) bool {
-	if len(s) != len(t) {
-		return false
-	}
+// encode and decode string
+func encode(strs []string) string {
+	res := ""
 
-	arr := make([]int, 26)
-	for i := range s {
-		arr[s[i]-'a']++
-		arr[t[i]-'a']--
-	}
-
-	for _, v := range arr {
-		if v != 0 {
-			return false
-		}
-	}
-
-	return true
-}
-
-func productExceptSelf(nums []int) []int {
-	n := len(nums)
-	res := make([]int, n)
-
-	for i := range res {
-		res[i] = 1
-	}
-
-	prefix := 1
-	for i := range n {
-		res[i] = prefix
-		prefix *= nums[i]
-	}
-
-	postfix := 1
-	for i := n - 1; i >= 0; i-- {
-		res[i] *= postfix
-		postfix *= nums[i]
+	for _, str := range strs {
+		res += strconv.Itoa(len(str)) + "#" + str
 	}
 
 	return res
 }
 
-func isValidSudoku(board [][]byte) bool {
-	rows := make([]map[byte]bool, 9)
-	cols := make([]map[byte]bool, 9)
-	squares := make([]map[byte]bool, 9)
+func decode(str string) []string {
+	res := make([]string, 0)
 
-	for i := 0; i < 9; i++ {
-		rows[i] = make(map[byte]bool)
-		cols[i] = make(map[byte]bool)
-		squares[i] = make(map[byte]bool)
-	}
-
-	for r := 0; r < 9; r++ {
-		for c := 0; c < 9; c++ {
-			if board[r][c] == '.' {
-				continue
-			}
-
-			val := board[r][c]
-			squareIdx := (r/3)*3 + c/3
-
-			if rows[r][val] || cols[c][val] || squares[squareIdx][val] {
-				return false
-			}
-
-			rows[r][val] = true
-			cols[c][val] = true
-			squares[squareIdx][val] = true
-		}
-	}
-
-	return true
+	return res
 }
 
 func main() {
@@ -157,22 +101,9 @@ func main() {
 	result2 := topKFreqElements(arr2, 2)
 	fmt.Println(result2)
 
-	//print(isAnagram("anagram", "nagaram"))
+	encoded := encode([]string{"yes", "You", "are", "doing", "great"})
+	println(encoded)
 
-	//fmt.Print(productExceptSelf([]int{1, 2, 3, 4}))
-
-	board := [][]byte{
-		{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
-		{'6', '.', '.', '1', '9', '5', '.', '.', '.'},
-		{'.', '9', '8', '.', '.', '.', '.', '6', '.'},
-		{'8', '.', '.', '.', '6', '.', '.', '.', '3'},
-		{'4', '.', '.', '8', '.', '3', '.', '.', '1'},
-		{'7', '.', '.', '.', '2', '.', '.', '.', '6'},
-		{'.', '6', '.', '.', '.', '.', '2', '8', '.'},
-		{'.', '.', '.', '4', '1', '9', '.', '.', '5'},
-		{'.', '.', '.', '.', '8', '.', '.', '7', '9'},
-	}
-
-	fmt.Println(isValidSudoku(board))
-
+	decoded := decode(encoded)
+	println(decoded)
 }
