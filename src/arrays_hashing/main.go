@@ -95,6 +95,29 @@ func isAnagram(s string, t string) bool {
 	return true
 }
 
+func productExceptSelf(nums []int) []int {
+	n := len(nums)
+	res := make([]int, n)
+
+	for i := range res {
+		res[i] = 1
+	}
+
+	prefix := 1
+	for i := range n {
+		res[i] = prefix
+		prefix *= nums[i]
+	}
+
+	postfix := 1
+	for i := n - 1; i >= 0; i-- {
+		res[i] *= postfix
+		postfix *= nums[i]
+	}
+
+	return res
+}
+
 func main() {
 	//arr2 := []int{1, 1, 1, 2, 2, 2, 3}
 	arr2 := []int{4, 4, 4, 3, 3, 3, 1, 5, 5}
@@ -102,5 +125,7 @@ func main() {
 	fmt.Println(result2)
 
 	//print(isAnagram("anagram", "nagaram"))
+
+	fmt.Print(productExceptSelf([]int{1, 2, 3, 4}))
 
 }
