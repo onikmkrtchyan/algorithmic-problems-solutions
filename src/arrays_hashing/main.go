@@ -111,10 +111,23 @@ func encode(strs []string) string {
 
 func decode(str string) []string {
 	res := make([]string, 0)
-	// todo
+
+	for i := 0; i < len(str); {
+		j := i
+		for ; j < len(str) && str[j] != '#'; j++ {
+		}
+
+		length, _ := strconv.Atoi(str[i:j])
+		res = append(res, str[j+1:j+1+length])
+		i = j + 1 + length
+	}
+
 	return res
 }
 
+// Time complexity: O(n)
+// Space Complexity: O(1) excluding the output array
+// The result array res doesn't count as extra space since it's the required output
 func productExceptSelf(nums []int) []int {
 	n := len(nums)
 	res := make([]int, n)
@@ -171,22 +184,54 @@ func isValidSudoku(board [][]byte) bool {
 	return true
 }
 
+// Each number in the array is visited at most twice (once in the outer loop, and at most once as part of a consecutive sequence in the inner loop)
+// Time complexity: O(n)
+// Space complexity: O(n)
+func longestConsecutive(nums []int) int {
+	// Initialize the map
+	m := make(map[int]bool)
+	for _, v := range nums {
+		m[v] = true
+	}
+
+	longest := 0
+	for _, v := range nums {
+		// If the number is already part of a sequence, skip it till the first number
+		if m[v-1] {
+			fmt.Println("Skipping ", v)
+			continue
+		}
+
+		current := 1
+		for m[v+1] {
+			current++
+			v++
+		}
+
+		if current > longest {
+			longest = current
+		}
+	}
+
+	return longest
+}
+
 func main() {
 	//arr2 := []int{1, 1, 1, 2, 2, 2, 3}
 	arr2 := []int{4, 4, 4, 3, 3, 3, 1, 5, 5}
 	result2 := topKFreqElements(arr2, 2)
 	fmt.Println(result2)
 
-	//print(isAnagram("anagram", "nagaram"))
+	//fmt.Print(isAnagram("anagram", "nagaram"))
 
-	fmt.Print(productExceptSelf([]int{1, 2, 3, 4}))
+	fmt.Println(productExceptSelf([]int{1, 2, 3, 4}))
 	//fmt.Print(productExceptSelf([]int{1, 2, 3, 4}))
 
 	encoded := encode([]string{"yes", "You", "are", "doing", "great"})
-	println(encoded)
+	fmt.Println(encoded)
 
 	decoded := decode(encoded)
-	println(decoded)
+	fmt.Println(decoded)
 
 	board := [][]byte{
 		{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
@@ -202,4 +247,5 @@ func main() {
 
 	fmt.Println(isValidSudoku(board))
 
+	fmt.Println("LongestConsecutive ", longestConsecutive([]int{100, 4, 200, 1, 3, 2}))
 }
