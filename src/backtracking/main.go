@@ -5,20 +5,6 @@ import (
 	"sort"
 )
 
-func main() {
-	set := []int{1, 2, 3}
-	result := subsets(set)
-	fmt.Println("Result ", result)
-
-	set2 := []int{2, 3, 6, 7}
-	result = combinationSum(set2, 7)
-	fmt.Println("Result 2 ", result)
-
-	set3 := []int{10, 1, 2, 7, 6, 1, 5}
-	result = combinationSum2(set3, 8)
-	fmt.Println(result)
-}
-
 func subsets(set []int) [][]int {
 	res := make([][]int, 0)
 	current := make([]int, 0, len(set))
@@ -103,4 +89,18 @@ func dfs2(res *[][]int, cur []int, i int, set []int, target int) {
 	}
 
 	dfs2(res, cur, i+1, set, target)
+}
+
+func main() {
+	set := []int{1, 2, 3}
+	result := subsets(set)
+	fmt.Println("Result ", result)
+
+	set2 := []int{2, 3, 6, 7}
+	result = combinationSum(set2, 7)
+	fmt.Println("Result 2 ", result)
+
+	set3 := []int{10, 1, 2, 7, 6, 1, 5}
+	result = combinationSum2(set3, 8)
+	fmt.Println(result)
 }
