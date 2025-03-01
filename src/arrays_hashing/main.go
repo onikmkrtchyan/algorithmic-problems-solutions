@@ -189,21 +189,22 @@ func isValidSudoku(board [][]byte) bool {
 // Space complexity: O(n)
 func longestConsecutive(nums []int) int {
 	// Initialize the map
-	m := make(map[int]bool)
+	numsMap := make(map[int]bool)
 	for _, v := range nums {
-		m[v] = true
+		numsMap[v] = true
 	}
 
 	longest := 0
-	for _, v := range nums {
+	// If iterate over the map instead of nums slice, the runtime would be 10x faster than slice.
+	//for _, v := range nums {
+	for v := range numsMap {
 		// If the number is already part of a sequence, skip it till the first number
-		if m[v-1] {
-			fmt.Println("Skipping ", v)
+		if numsMap[v-1] {
 			continue
 		}
 
 		current := 1
-		for m[v+1] {
+		for numsMap[v+1] {
 			current++
 			v++
 		}
