@@ -38,7 +38,32 @@ func binarySearchRecursive(arr []int, target, l, r int) int {
 	}
 }
 
+// Find Minimum in Rotated Sorted Array
+func findMin(arr []int) int {
+	l := 0
+	r := len(arr) - 1
+
+	// array is not rotated(sorted) or has only one element
+	if len(arr) == 1 || arr[l] <= arr[r] {
+		return arr[l]
+	}
+
+	for l < r {
+		mid := l + (r-l)/2
+
+		if arr[mid] > arr[r] {
+			l = mid + 1
+		} else {
+			r = mid
+		}
+	}
+
+	return arr[l]
+}
+
 func main() {
 	fmt.Println(binarySearch([]int{1, 2, 3, 4, 5}, 3))
 	fmt.Println(binarySearchRecursive([]int{1, 2, 3, 4, 5}, 3, 0, 4))
+
+	fmt.Println(findMin([]int{3, 4, 5, 1, 2}))
 }
