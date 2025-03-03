@@ -89,6 +89,12 @@ func trappingWater(heights []int) int {
 	return totalWater
 }
 
+func maxVowels(s string, k int) int {
+	res := 0
+
+	return res
+}
+
 func main() {
 	arr := []int{1, 2, 3, 3, 3, 4, 4}
 	fmt.Println(removeDuplicate(arr)) // answer : [1 2 3 4]
