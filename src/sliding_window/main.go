@@ -49,26 +49,52 @@ func checkInclusion(s1 string, s2 string) bool {
 	return false
 }
 
+// Best Time to Buy and Sell Stock
 func maxProfit(prices []int) int {
-	l := 0
-	r := 1
-	res := 0
-	for r < len(prices) {
-		if prices[l] > prices[r] {
-			l = r
+	left := 0
+	right := 1
+	maxProfit := 0
+	for right < len(prices) {
+		if prices[left] > prices[right] {
+			left = right
 		} else {
-			res = max(res, prices[r]-prices[l])
+			maxProfit = max(maxProfit, prices[right]-prices[left])
 		}
-		r++
+		right++
 	}
 
-	return res
+	return maxProfit
+}
+
+// Trapping Rain Water
+func trappingWater(heights []int) int {
+	totalWater := 0
+	left := 0
+	right := len(heights) - 1
+	leftMaxHeight := heights[left]
+	rightMaxHeight := heights[right]
+
+	for left < right {
+		if leftMaxHeight < rightMaxHeight {
+			left++
+			leftMaxHeight = max(leftMaxHeight, heights[left])
+			totalWater += leftMaxHeight - heights[left]
+		} else {
+			right--
+			rightMaxHeight = max(rightMaxHeight, heights[right])
+			totalWater += rightMaxHeight - heights[right]
+		}
+	}
+
+	return totalWater
 }
 
 func main() {
 	arr := []int{1, 2, 3, 3, 3, 4, 4}
-	fmt.Println(removeDuplicate(arr))
+	fmt.Println(removeDuplicate(arr)) // answer : [1 2 3 4]
 
-	fmt.Println(checkInclusion("abc", "lecabee"))
-	fmt.Println(maxProfit([]int{7, 1, 5, 3, 6, 4}))
+	fmt.Println(checkInclusion("abc", "lecabee"))   // answer : true
+	fmt.Println(maxProfit([]int{7, 1, 5, 3, 6, 4})) // answer : 5
+
+	fmt.Println(trappingWater([]int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1})) // answer : 6
 }
