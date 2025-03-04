@@ -89,10 +89,37 @@ func trappingWater(heights []int) int {
 	return totalWater
 }
 
+// Find the maximum number of vowels in a substring of length k
+// Time Complexity: O(n)
+// Space Complexity: O(1)
 func maxVowels(s string, k int) int {
-	res := 0
+	maxCount := 0
+	currentVowelCount := 0
+	windowStart := 0
 
-	return res
+	for windowEnd := 0; windowEnd < len(s); windowEnd++ {
+		// Add the current character to our window
+		if isVowel(s[windowEnd]) {
+			currentVowelCount++
+		}
+
+		// If window exceeds size k, shrink from left
+		if windowEnd-windowStart+1 > k {
+			if isVowel(s[windowStart]) {
+				currentVowelCount--
+			}
+			windowStart++
+		}
+
+		// Update maximum vowel count
+		maxCount = max(maxCount, currentVowelCount)
+	}
+
+	return maxCount
+}
+
+func isVowel(c byte) bool {
+	return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u'
 }
 
 func main() {
@@ -103,4 +130,6 @@ func main() {
 	fmt.Println(maxProfit([]int{7, 1, 5, 3, 6, 4})) // answer : 5
 
 	fmt.Println(trappingWater([]int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1})) // answer : 6
+
+	fmt.Println(maxVowels("abciiidef", 3)) // answer : 3
 }
