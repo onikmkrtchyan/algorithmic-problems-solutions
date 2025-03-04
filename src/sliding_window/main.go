@@ -122,6 +122,13 @@ func isVowel(c byte) bool {
 	return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u'
 }
 
+// Longest Substring Without Repeating Characters
+// Complexity O(n) time and O(m) space, where n is the length of the string and m is the number of unique characters in the string.
+func lengthOfLongestSubstring(s string) int {
+	//todo implement
+	return 0
+}
+
 func main() {
 	arr := []int{1, 2, 3, 3, 3, 4, 4}
 	fmt.Println(removeDuplicate(arr)) // answer : [1 2 3 4]
