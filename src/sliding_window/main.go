@@ -125,8 +125,21 @@ func isVowel(c byte) bool {
 // Longest Substring Without Repeating Characters
 // Complexity O(n) time and O(m) space, where n is the length of the string and m is the number of unique characters in the string.
 func lengthOfLongestSubstring(s string) int {
-	//todo implement
-	return 0
+	res := 0
+	maps := make(map[byte]bool)
+
+	left := 0
+	for right := 0; right < len(s); right++ {
+		if maps[s[right]] {
+			delete(maps, s[right])
+			left++
+		}
+		maps[s[right]] = true
+
+		res = max(res, right-left+1)
+	}
+
+	return res
 }
 
 func main() {
@@ -138,5 +151,7 @@ func main() {
 
 	fmt.Println(trappingWater([]int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1})) // answer : 6
 
-	fmt.Println(maxVowels("abciiidef", 3)) // answer : 3
+	fmt.Println(maxVowels("abciiidef", 3))            // answer : 3
+	fmt.Println(lengthOfLongestSubstring("abcabcbb")) // answer : 3
+	fmt.Println(lengthOfLongestSubstring("abba"))     // answer : 2
 }
