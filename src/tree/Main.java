@@ -38,6 +38,10 @@ public class Main {
                                                       // G
         // Test
         preOrderTraversal(root);
+        System.out.println();
+        inOrderTraversal(root);
+        System.out.println();
+        postOrderTraversal(root);
     }
 
     public static void preOrderTraversal(TreeNode node) {
@@ -50,6 +54,24 @@ public class Main {
         System.out.print(node.data + ", ");
         preOrderTraversal(node.right);
     }
-}
 
-//Java
+    public static void inOrderTraversal(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+
+        System.out.print(node.data + ", ");
+        inOrderTraversal(node.left);
+        inOrderTraversal(node.right);
+    }
+
+    public static void postOrderTraversal(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+
+        postOrderTraversal(node.left);
+        postOrderTraversal(node.right);
+        System.out.print(node.data + ", ");
+    }
+}
