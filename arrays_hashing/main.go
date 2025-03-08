@@ -223,10 +223,7 @@ func main() {
 	result2 := topKFreqElements(arr2, 2)
 	fmt.Println(result2)
 
-	//fmt.Print(isAnagram("anagram", "nagaram"))
-
 	fmt.Println(productExceptSelf([]int{1, 2, 3, 4}))
-	//fmt.Print(productExceptSelf([]int{1, 2, 3, 4}))
 
 	encoded := encode([]string{"yes", "You", "are", "doing", "great"})
 	fmt.Println(encoded)
