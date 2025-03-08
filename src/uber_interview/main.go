@@ -2,9 +2,6 @@ package main
 
 import "fmt"
 
-// Right Solution
-// Time complexity: O(n*m*4^l) where n is the number of rows, m is the number of columns, and l is the length of the word
-// Space complexity: O(n*m) for the visited matrix
 /*
 The idea is to solve a word puzzle!
 The allowed movements are for now horizontal and vertical, no diagonals.
@@ -25,6 +22,7 @@ The allowed movements are for now horizontal and vertical, no diagonals.
 
 */
 // Time complexity: O(n*m*4^l) where n is the number of rows, m is the number of columns, and l is the length of the word
+// Space complexity: O(n*m)
 func wordSearch(board [][]byte, word string) bool {
 	if len(word) == 0 {
 		return true
