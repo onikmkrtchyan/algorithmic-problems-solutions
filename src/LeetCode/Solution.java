@@ -1250,6 +1250,79 @@ public class Solution {
         }
     }
 
+    // Reverse a string
+    public static String reverse(String str) {
+        char[] arr = str.toCharArray();
+        int size = arr.length;
+        int i = 0;
+        char temp;
+        while (i < size / 2) {
+            temp = arr[i];
+            arr[i] = arr[size - i - 1];
+            arr[size - i - 1] = temp;
+            i++;
+        }
+        return String.valueOf(arr);
+    }
+
+
+    public static int lengthOfLongestSubstring(String s) {
+        int i = 0, j = 0, max = 0;
+        Set<Character> set = new HashSet<>();
+
+        while (j < s.length()) {
+            if (!set.contains(s.charAt(j))) {
+                set.add(s.charAt(j++));
+                max = Math.max(max, set.size());
+            } else {
+                set.remove(s.charAt(i++));
+            }
+        }
+
+        return max;
+    }
+
+    public static int lengthOfLongestUnrepeatableSubstring(String s) {
+        int maxSubLength = 0, currentSubLength = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+
+            if (i != s.length() - 1 && s.charAt(i) != s.charAt(i + 1)) {
+                currentSubLength++;
+            }
+
+            if (i == s.length() - 1 && s.charAt(i - 1) != s.charAt(i)) {
+                currentSubLength++;
+            }
+
+            if (i == s.length() - 1 || s.charAt(i) == s.charAt(i + 1)) {
+                if (currentSubLength > maxSubLength) {
+                    if (i == s.length() - 1) {
+                        maxSubLength = currentSubLength;
+                    }
+                    else {
+                        maxSubLength = currentSubLength + 1;
+                    }
+                }
+                currentSubLength = 0;
+            }
+
+        }
+
+        return maxSubLength;
+    }
+
+    /**
+     * Find quantity of all possible subarrays, which arithmetic mean equals to N
+     *
+     * @param N   value of arithmetic mean
+     * @param arr arr of integers
+     * @return quantity of all possible subarrays, which arithmetic mean equals to N
+     */
+    public static int quantityOfArithmeticMean(int[] arr, int N) {
+        //todo
+        return 0;
+    }
 
     public static void main(String[] args) {
         System.out.println(romanToInt("MCMXCIV"));

@@ -1,4 +1,4 @@
-package DiplomaWork;
+package bachelors_work;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

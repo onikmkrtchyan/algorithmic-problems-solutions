@@ -1,6 +1,6 @@
-package GraphKnownAlgorithms;
+package Graphs;
 
-public class DijkstraExample {
+public class Dijkstra {
     // A utility method to compute the vertex with the distance value, which is minimum
     // from the group of vertices that has not been included yet
     static final int totalVertex = 9;
@@ -18,7 +18,7 @@ public class DijkstraExample {
                 {7, 10, -1, -1, -1, -1, 2, -1, 6},
                 {-1, 4, 1, 3, -1, 5, 5, 6, -1}};
 
-        DijkstraExample obj = new DijkstraExample();
+        Dijkstra obj = new Dijkstra();
         obj.dijkstra(graph, 0);
     }
 

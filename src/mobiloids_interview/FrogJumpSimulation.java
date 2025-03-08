@@ -1,4 +1,4 @@
-package InternshipTaskMobiloids;
+package mobiloids_interview;
 
 import java.util.Random;
 
