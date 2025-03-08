@@ -84,6 +84,7 @@ func main() {
 
 	fmt.Println(wordSearch(board, "abc"))  // true
 	fmt.Println(wordSearch(board, "dasa")) // true
+	fmt.Println(wordSearch(board, "acw"))  // false
 }
 
 ///*
