@@ -8,11 +8,11 @@ import (
 func subsets(set []int) [][]int {
 	res := make([][]int, 0)
 	current := make([]int, 0, len(set))
-	backtracking(&res, current, 0, set)
+	dfsSubsets(&res, current, 0, set)
 	return res
 }
 
-func backtracking(res *[][]int, current []int, i int, set []int) {
+func dfsSubsets(res *[][]int, current []int, i int, set []int) {
 	if i == len(set) {
 		subset := make([]int, len(current))
 		copy(subset, current) // 1- destination, 2- source
@@ -21,20 +21,20 @@ func backtracking(res *[][]int, current []int, i int, set []int) {
 	}
 
 	current = append(current, set[i])
-	backtracking(res, current, i+1, set)
+	dfsSubsets(res, current, i+1, set)
 
 	current = current[:len(current)-1]
-	backtracking(res, current, i+1, set)
+	dfsSubsets(res, current, i+1, set)
 }
 
 func combinationSum(set []int, target int) [][]int {
 	res := make([][]int, 0)
 	cur := make([]int, 0, len(set))
-	dfs(&res, cur, 0, set, target)
+	dfsCS(&res, cur, 0, set, target)
 	return res
 }
 
-func dfs(res *[][]int, cur []int, i int, set []int, target int) {
+func dfsCS(res *[][]int, cur []int, i int, set []int, target int) {
 	if target == 0 {
 		subset := make([]int, len(cur))
 		copy(subset, cur)
@@ -47,21 +47,21 @@ func dfs(res *[][]int, cur []int, i int, set []int, target int) {
 	}
 
 	cur = append(cur, set[i])
-	dfs(res, cur, i, set, target-set[i])
+	dfsCS(res, cur, i, set, target-set[i])
 
 	cur = cur[:len(cur)-1]
-	dfs(res, cur, i+1, set, target)
+	dfsCS(res, cur, i+1, set, target)
 }
 
 func combinationSum2(candidates []int, target int) [][]int {
 	res := make([][]int, 0)
 	cur := make([]int, 0, len(candidates))
 	sort.Ints(candidates)
-	dfs2(&res, cur, 0, candidates, target)
+	dfsCS2(&res, cur, 0, candidates, target)
 	return res
 }
 
-func dfs2(res *[][]int, cur []int, i int, set []int, target int) {
+func dfsCS2(res *[][]int, cur []int, i int, set []int, target int) {
 	if target == 0 {
 		cur2 := make([]int, len(cur))
 		copy(cur2, cur)
@@ -80,7 +80,7 @@ func dfs2(res *[][]int, cur []int, i int, set []int, target int) {
 
 	// Include current number
 	cur = append(cur, set[i])
-	dfs2(res, cur, i+1, set, target-set[i])
+	dfsCS2(res, cur, i+1, set, target-set[i])
 
 	cur = cur[:len(cur)-1]
 
@@ -88,7 +88,7 @@ func dfs2(res *[][]int, cur []int, i int, set []int, target int) {
 		i++
 	}
 
-	dfs2(res, cur, i+1, set, target)
+	dfsCS2(res, cur, i+1, set, target)
 }
 
 func main() {
