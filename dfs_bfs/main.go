@@ -72,7 +72,7 @@ func numBusesToDestination(routes [][]int, source int, target int) int {
 // Course Schedule
 // https://leetcode.com/problems/course-schedule/
 // Time Complexity: O(N + P), where N is the number of courses and P is the number of prerequisites
-func canFinish(numCourses int, prerequisites [][]int) bool {
+func courseSchedule(numCourses int, prerequisites [][]int) bool {
 	// Map each course to its prerequisites
 	graph := make(map[int][]int)
 	for i := 0; i < numCourses; i++ {
@@ -129,10 +129,7 @@ func canFinish(numCourses int, prerequisites [][]int) bool {
 }
 
 func main() {
-
-	//fmt.Println(numBusesToDestination([][]int{{1, 2, 7}, {3, 6, 7}}, 1, 7))
-	//fmt.Println(numBusesToDestination([][]int{{7, 12}, {4, 5, 15}, {6}, {15, 19}, {9, 12, 13}}, 15, 12))
 	fmt.Println(numBusesToDestination([][]int{{7, 12}, {4, 5, 15}, {6}, {15, 19}, {9, 12, 13}, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}}, 1, 19))
 
-	fmt.Println(canFinish(5, [][]int{{0, 1}, {0, 2}, {1, 3}, {1, 4}, {3, 4}}))
+	fmt.Println(courseSchedule(5, [][]int{{0, 1}, {0, 2}, {1, 3}, {1, 4}, {3, 4}}))
 }
