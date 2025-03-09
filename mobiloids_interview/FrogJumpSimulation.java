@@ -37,7 +37,7 @@ public class FrogJumpSimulation {
     }
     
     public static void main(String[] args) {
-        int numSimulations = 100000000;
+        int numSimulations = 10000000;
         
         // Simulate frog jumps and estimate the probability
         double probabilityWithinUnitDisk = simulateFrogJumps(numSimulations);
