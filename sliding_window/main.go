@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// Remove Duplicates from Array
 func removeDuplicate(arr []int) []int {
 	seen := make(map[int]bool)
 	res := make([]int, 0)
