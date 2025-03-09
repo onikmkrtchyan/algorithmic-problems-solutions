@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// Iterative Binary Search
 func binarySearch(arr []int, target int) int {
 	l := 0
 	r := len(arr) - 1
@@ -22,6 +23,7 @@ func binarySearch(arr []int, target int) int {
 	return -1
 }
 
+// Recursive Binary Search
 func binarySearchRecursive(arr []int, target, l, r int) int {
 	if l > r {
 		return -1
