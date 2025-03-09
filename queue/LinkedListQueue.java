@@ -1,5 +1,6 @@
 package queue;
 
+// LinkedListQueue Implementation
 public class LinkedListQueue {
 
     static class Node {
