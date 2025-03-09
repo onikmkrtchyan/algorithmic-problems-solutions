@@ -256,5 +256,4 @@ class MST {
         } else
             System.out.println("This Graph is not Square grid,Please check your data in file");
     }
-
 }
