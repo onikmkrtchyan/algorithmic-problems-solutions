@@ -19,10 +19,16 @@ public class InsertionSort {
             int j = i - 1;
 
             while (j >= 0 && arr[j] > arr[j + 1]) {
-                Tools.swap(arr, j, j + 1);
+                swap(arr, j, j + 1);
                 j--;
             }
         }
         return arr;
+    }
+
+    public static void swap(int[] arr, int fromIndex, int toIndex) {
+        int temp = arr[fromIndex];
+        arr[fromIndex] = arr[toIndex];
+        arr[toIndex] = temp;
     }
 }

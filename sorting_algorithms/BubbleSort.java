@@ -21,10 +21,16 @@ public class BubbleSort {
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - i - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
-                    Tools.swap(arr, j, j + 1);
+                    swap(arr, j, j + 1);
                 }
             }
         }
         return arr;
+    }
+
+    public static void swap(int[] arr, int fromIndex, int toIndex) {
+        int temp = arr[fromIndex];
+        arr[fromIndex] = arr[toIndex];
+        arr[toIndex] = temp;
     }
 }
