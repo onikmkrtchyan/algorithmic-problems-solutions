@@ -74,7 +74,6 @@ func main() {
 
 	nodeF.left = nodeG //        G
 
-	// Test
 	PreOrderTraversal(root) // R, A, C, D, B, E, F, G // Root, Left, Right
 	fmt.Println()
 	InOrderTraversal(root) // C, A, D, R, E, B, G, F // Left, Root, Right
