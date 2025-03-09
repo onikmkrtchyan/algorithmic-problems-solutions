@@ -1,4 +1,4 @@
-package Graphs;
+package graphs;
 
 public class Dijkstra {
     // A utility method to compute the vertex with the distance value, which is minimum
