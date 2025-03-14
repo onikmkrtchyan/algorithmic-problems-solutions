@@ -130,25 +130,30 @@ func decode(str string) []string {
 // The result array res doesn't count as extra space since it's the required output
 func productExceptSelf(nums []int) []int {
 	n := len(nums)
-	res := make([]int, n)
 
-	for i := range res {
-		res[i] = 1
+	// Create three arrays
+	prefix := make([]int, n)  // Stores products of all elements to the left
+	postfix := make([]int, n) // Stores products of all elements to the right
+	result := make([]int, n)  // Stores the final result
+
+	// Calculate prefix products [1, 1, 2, 6] for nums = [1, 2, 3, 4]
+	prefix[0] = 1 // No elements to the left of first element
+	for i := 1; i < n; i++ {
+		prefix[i] = prefix[i-1] * nums[i-1]
 	}
 
-	prefix := 1
-	for i := range n {
-		res[i] = prefix
-		prefix *= nums[i]
+	// Calculate postfix products [24, 12, 4, 1] for nums = [1, 2, 3, 4]
+	postfix[n-1] = 1 // No elements to the right of last element
+	for i := n - 2; i >= 0; i-- {
+		postfix[i] = postfix[i+1] * nums[i+1]
 	}
 
-	postfix := 1
-	for i := n - 1; i >= 0; i-- {
-		res[i] *= postfix
-		postfix *= nums[i]
+	// Calculate final result by multiplying prefix and postfix [24, 12, 8, 6]
+	for i := 0; i < n; i++ {
+		result[i] = prefix[i] * postfix[i]
 	}
 
-	return res
+	return result
 }
 
 func isValidSudoku(board [][]byte) bool {
